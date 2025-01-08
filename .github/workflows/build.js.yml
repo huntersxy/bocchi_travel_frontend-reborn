@@ -3,7 +3,7 @@ name: Deploy Vue App to GitHub Pages
 on:
   push:
     branches:
-      - PR  # 设置触发部署的分支
+      - PR-Branch  # 设置触发部署的分支
 
 jobs:
   build-and-deploy:
@@ -26,13 +26,13 @@ jobs:
       id: cache
       with:
         path: 
-          ./web/node_modules
-        key: ${{runner.OS}}-${{hashFiles('**/web/package-lock.json')}}
+          ./node_modules
+        key: ${{runner.OS}}-${{hashFiles('**/package-lock.json')}}
           
     - name: 安装依赖
       if: steps.cache.outputs.cache-hit != 'true'
       run: |
-        cd web
+       
         npm install
 
 
@@ -42,7 +42,6 @@ jobs:
 
     - name: 构建Cordova项目
       run: |
-          cd web
           cordova create CordovaProject work.xiey.build bcbcbc
           cd CordovaProject
           cordova platform add android
@@ -52,36 +51,26 @@ jobs:
 
     - name: build Blog
       run: | 
-            cd web
+           
             npm run build
 
 
 
     - name: 配置设置
       run: |
-          mv config.xml web/CordovaProject/config.xml
-          cd web/CordovaProject/
+          mv config.xml CordovaProject/config.xml
+          cd CordovaProject/
           cordova build android
           
 
     - name: Upload dev APK
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v4
       with:
           name: app-dev
-          path: web/CordovaProject/platforms/android/app/build/outputs/apk/debug/app-debug.apk
+          path: CordovaProject/platforms/android/app/build/outputs/apk/debug/app-debug.apk
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@4.1.2
       with:
         branch: gh-pages  # 部署到 gh-pages 分支
-        folder: web/CordovaProject/www  # 构建输出的目录
+        folder: CordovaProject/www  # 构建输出的目录
 
-    - name: 📂 Sync files
-      if: github.repository != 'FantasyRL/bocchi-the-travel'
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
-      with:
-        server: ${{ secrets.FTP_SERVER }}
-        username: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: ./web/CordovaProject/www/
-        server-dir: ./
-        log-level: verbose

@@ -1,1 +1,0 @@
-import{_ as o,c,b as s,o as a}from"./index-jbzzm3uq.js";const r={},t={class:"grid"};function d(n,e){return a(),c("div",t,e[0]||(e[0]=[s("div",{class:"box"},"项目 1",-1),s("div",{class:"box"},"项目 2",-1),s("div",{class:"box"},"项目 3",-1),s("div",{class:"box"},"项目 4",-1)]))}const l=o(r,[["render",d]]);export{l as default};

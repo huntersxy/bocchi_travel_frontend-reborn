@@ -1,19 +1,6 @@
 <script setup>
 import Cookies from "js-cookie";
-import { ref } from "vue";
 import { useCounterStore } from "@/stores/api";
-const open = ref(false);
-const confirmLoading = ref(false);
-const showModal = () => {
-  open.value = true;
-};
-const handleOk = () => {
-  confirmLoading.value = true;
-  setTimeout(() => {
-    open.value = false;
-    confirmLoading.value = false;
-  });
-};
 </script>
 
 <script>
@@ -25,7 +12,7 @@ import {
   PlayCircleOutlined,
   QuestionCircleOutlined
 } from "@ant-design/icons-vue";
-import "./itinerary.vue";
+import "./party/itinerary.vue";
 import Cookies from "js-cookie";
 const setapiurl = useCounterStore();
 export default {
@@ -42,9 +29,9 @@ export default {
     };
   },
   methods: {
-    goItinerary(iid) {
-      const url =
-        setapiurl.apiurl + "/party/itinerary/merge?itinerary_id=" + iid + "&party_id=" + this.id;
+    deleteItinerary(id) {
+      const url = setapiurl.apiurl + "/party/itinerary/delete?itinerary_id=" + id; // 假设这是删除 itinerary 的 API 接口地址
+
       axios
         .get(url, {
           headers: {
@@ -128,7 +115,7 @@ export default {
   <div class="travels">
     <a-page-header
       style="border: 1px solid rgb(235, 237, 240)"
-      title="审核计划 "
+      title="我的计划 "
       @back="() => $router.go(-1)"
     />
   </div>
@@ -137,7 +124,7 @@ export default {
 
   <div class="itinerary">
     <div v-for="item in info" :key="item.id" class="item">
-      <el-card style="width: 90vw" v-if="item.is_merged">
+      <el-card style="width: 90vw">
         <div class="item-info">
           <div>ID:{{ item.id }}</div>
           <div>标题:{{ item.title }}</div>
@@ -148,10 +135,10 @@ export default {
           <div>开始时间:{{ item.schedule_start_time }}</div>
           <div>结束时间:{{ item.schedule_end_time }}</div>
 
-          <button @click="goItinerary(item.id)">
+          <button @click="deleteItinerary(item.id)">
             <span class="shadow"></span>
             <span class="edge"></span>
-            <span class="front text"> 通过计划 </span>
+            <span class="front text"> 删除计划 </span>
           </button>
         </div>
       </el-card>
@@ -217,10 +204,10 @@ button {
   border-radius: 12px;
   background: linear-gradient(
     to left,
-    hsl(145, 100%, 70%) 0%,
-    hsl(153, 42%, 56%) 8%,
-    hsl(113, 100%, 72%) 92%,
-    hsl(162, 78%, 64%) 100%
+    hsl(340deg 100% 16%) 0%,
+    hsl(340deg 100% 32%) 8%,
+    hsl(340deg 100% 32%) 92%,
+    hsl(340deg 100% 16%) 100%
   );
 }
 
@@ -231,7 +218,7 @@ button {
   border-radius: 12px;
   font-size: 1.1rem;
   color: white;
-  background: hsl(135, 54%, 62%);
+  background: hsl(345deg 100% 47%);
   will-change: transform;
   transform: translateY(-4px);
   transition: transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1);

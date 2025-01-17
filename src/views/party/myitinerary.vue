@@ -12,7 +12,7 @@ import {
   PlayCircleOutlined,
   QuestionCircleOutlined
 } from "@ant-design/icons-vue";
-import "./party/itinerary.vue";
+import "./itinerary.vue";
 import Cookies from "js-cookie";
 const setapiurl = useCounterStore();
 export default {

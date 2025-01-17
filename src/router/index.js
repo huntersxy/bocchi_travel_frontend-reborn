@@ -91,13 +91,13 @@ const router = createRouter({
     },
     {
       path: '/ifollow/:id',
-      name: 'ifollow',
+      name: '我的关注',
       component: () => import('../views/ifollow.vue'),
 
     },
     {
       path: '/followme/:id',
-      name: 'followme',
+      name: '我的粉丝',
       component: () => import('../views/followme.vue'),
 
     },

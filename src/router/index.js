@@ -12,7 +12,7 @@ const router = createRouter({
     {
       path: '/about',
       name: 'about',
-      component: () => import('../views/myself.vue')
+      component: () => import('../views/user/myself.vue')
     },
     {
       path: '/explore',
@@ -22,83 +22,83 @@ const router = createRouter({
     {
       path: '/create',
       name: 'create',
-      component: () => import('../views/CreatePage.vue'),
+      component: () => import('../views/create/CreatePage.vue'),
     },
     {
       path: '/createplan/:id',
       name: 'createplan',
-      component: () => import('../views/Createplan.vue'),
+      component: () => import('../views/create/Createplan.vue'),
     },
     {
       path: '/detail/:id',
       name: 'detail',
-      component: () => import('../views/DetailView.vue'),
+      component: () => import('../views/wiki/DetailView.vue'),
     },
     {
       path: '/finish/:id',
       name: 'finish',
-      component: () => import('../views/finish.vue'),
+      component: () => import('../views/party/finish.vue'),
     },
     {
       path: '/travels/:id',
       name: 'travels',
-      component: () => import('../views/travels.vue'),
+      component: () => import('../views/party/travels.vue'),
     },
     {
       path: '/alltravelshave/',
       name: 'alltravelshave',
-      component: () => import('../views/alltravelshave.vue'),
+      component: () => import('../views/party/alltravelshave.vue'),
     },
     {
       path: '/alltravels/',
       name: 'alltravels',
-      component: () => import('../views/alltravels.vue'),
+      component: () => import('../views/party/alltravels.vue'),
     },
     {
       path: '/about/:id',
       name: 'about-others',
-      component: () => import('../views/userpage.vue')
+      component: () => import('../views/user/userpage.vue')
     },
     {
       path: '/itinerarys/:id',
       name: 'itinerary',
-      component: () => import('../views/itinerary.vue'),
+      component: () => import('../views/party/itinerary.vue'),
       meta: { keepAlive: false }
     },
     {
       path: '/myitinerarys/:id',
       name: 'myitinerary',
-      component: () => import('../views/myitinerary.vue'),
+      component: () => import('../views/party/myitinerary.vue'),
       meta: { keepAlive: false }
     },
     {
       path: '/partys/:id',
       name: 'party',
-      component: () => import('../views/party.vue'),
+      component: () => import('../views/party/party.vue'),
       meta: { keepAlive: false }
     },
     {
       path: '/merplan/:id',
       name: 'merplan',
-      component: () => import('../views/merplan.vue'),
+      component: () => import('../views/party/merplan.vue'),
       meta: { keepAlive: false }
     },
     {
       path: '/member/:id',
       name: 'member',
-      component: () => import('../views/member.vue'),
+      component: () => import('../views/party/member.vue'),
 
     },
     {
       path: '/ifollow/:id',
-      name: 'ifollow',
-      component: () => import('../views/ifollow.vue'),
+      name: '我的关注',
+      component: () => import('../views/user/ifollow.vue'),
 
     },
     {
       path: '/followme/:id',
-      name: 'followme',
-      component: () => import('../views/followme.vue'),
+      name: '我的粉丝',
+      component: () => import('../views/user/followme.vue'),
 
     },
   ]
